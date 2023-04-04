@@ -1,0 +1,192 @@
+<!-- create a blank html page -->
+<html>
+
+<head>
+    <title>Ray Tracing and Beyond</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>This proposal can be found at https://akshitdewan.github.io/cs184-final-project/proposal.html</h1>
+
+        <h1>Ray Tracing and Beyond</h1>
+        <p>
+            Our goal in this project is to design and implement a faster, more efficient, and more feature-loaded ray
+            tracer
+            than the one implemented as part of project 3.
+        </p>
+        <b>
+            Project Description
+        </b>
+        <p>
+            Ray tracing is a powerful technique to render various scenes, but it can also be slow and inefficient,
+            especially when sending out many rays into the scene to render. To address these issues, we plan to add
+            optimizations and features inspired by Hyperion, a renderer by Disney. The challenges in this project
+            involve
+            figuring out how to efficiently optimize our ray tracer, adding new techniques, and exploring how to best
+            demonstrate our ray tracer's ability to render complex scenes.
+        </p>
+        <b>We plan to deliver</b>
+        <p>Main questions: What technique(s) best work for what scenes (e.g. different lighting)? What are the
+            performance
+            improvements resulting from each optimization technique?
+        </p>
+
+        <ul>
+
+            <li>
+                Implementation of the <b>cache points</b> optimization. Based on the Hyperion paper, cache points is an
+                optimization technique for ray tracer to render complex scenes with lots of light by first randomly
+                generating cache points based on a distribution, updating the cache points in iterations, and sampling a
+                light from a cache point.
+
+
+                <ul>
+                    <li>Show and compare the speedup and performance of using cache points to render a scene with lots
+                        of
+                        lights vs using a simple ray tracer.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Implementation of <b>photon mapping</b> as a novel technique in addition to standard ray tracing. Photon
+                mapping involves sending photons from a light source into the scene and storing their intersections and
+                incident directions in a photon map.
+
+                <ul>
+                    <li>
+                        Show and compare the performance of using photon mapping to render scenes vs using a simple ray
+                        tracer.
+                    </li>
+                    <li>
+                        Show and compare image quality (noise and variance) using photon mapping to render scenes vs no
+                        photon mapping.
+                    </li>
+                    <li>
+                        Able to render scenes like the following:
+                        <img src="images/photon-mapping1.png" height="150px">
+                        <img src="images/photon-mapping2.jpg" height="150px">
+                    </li>
+                    <li>
+                        Some example <b>metrics</b> of interest: time to render, number of intersection tests,
+                        iterations
+                        till convergence, ability to render advanced lighting effects (e.g. caustics)
+
+                    </li>
+                </ul>
+
+            </li>
+        </ul>
+        <b>We hope to deliver</b>
+        <p>
+        <ul>
+            <li>Optimizations to photon mapping. Photon mapping can be improved with <b>shadow photons</b>. When a
+                photon
+                intersects an
+                object in a scene, a shadow photon in the direction of the light source can also be generated and its
+                intersection with any object is stored in the photon map. Upon calculating direct illumination with
+                raytracing,
+                if a photon has a direct path to a light, additional intersections can be ignored.</li>
+
+            <li>Porting ray tracing and photon mapping to <b>GPU</b>. Raytracing and photon mapping involve generating
+                parallel rays or
+                photons in batches, a process that benefits greatly from increased parallelism using GPUs.</li>
+        </ul>
+        </p>
+
+        <b>Schedule</b>
+        <table>
+            <tr>
+                <th>Week</th>
+                <th>Plan</th>
+            </tr>
+            <tr>
+                <td>Week 1 (4/3)</td>
+                <td>
+                    <ul>
+                        <li>Decide which ray tracer to add these optimizations and features to</li>
+                        <li>Find example scenes to render and port them to .dae</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Week 2 (4/10) and week 3 (4/17)
+
+                </td>
+                <td>
+                    <ul>
+                        <li> Implement cache points optimization and render a scene with many many lights using the
+                            class
+                            ray
+                            tracer vs the optimized one</li>
+                        <li>Implement photon mapping with caustics and render an ocean scene</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Week 4 (4/24)
+                </td>
+                <td>
+                    <ul>
+                        <li>Work on extensions (porting to GPU, photon mapping optimization)</li>
+                    </ul>
+
+                </td>
+            </tr>
+            <tr>
+                <td>Week 5 (5/1)
+
+
+
+                </td>
+                <td>
+                    <ul>
+                        <li>Gather results and make presentation</li>
+                    </ul>
+
+                </td>
+            </tr>
+        </table>
+        <b>Resources</b>
+        <ul>
+            <li> "The Design and Evolution of Disney's Hyperion Renderer":
+                https://media.disneyanimation.com/uploads/production/publication_asset/177/asset/a.pdf</li>
+            <li>Potential Blender files to use and/or reference for scenes for rendering:
+                https://www.blender.org/download/demo-files/</li>
+            <li>
+                Computing resources: CPU (C++), potentially GPU (CUDA)
+            </li>
+            <li> Potentially referencing project 3 as a starting point for the raytracer, OR implementing a simple one
+                from
+                scratch
+            </li>
+            <li>
+                Henrik Wann Jensen. 1996. Global illumination using photon maps.
+                http://graphics.ucsd.edu/~henrik/papers/photon_map/global_illumination_using_photon_maps_egwr96.pdf
+            </li>
+        </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+
+
+</html>
